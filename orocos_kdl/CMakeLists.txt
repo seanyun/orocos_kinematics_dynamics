@@ -74,13 +74,13 @@ endif(KDL_USE_NEW_TREE_INTERFACE)
 
 INCLUDE (${PROJ_SOURCE_DIR}/config/DependentOption.cmake)
 
-OPTION(ENABLE_TESTS OFF "Enable building of tests")
+OPTION(ENABLE_TESTS "Enable building of tests" ON)
 IF( ENABLE_TESTS )
   # If not in standard paths, set CMAKE_xxx_PATH's in environment, eg.
   # export CMAKE_INCLUDE_PATH=/opt/local/include
   # export CMAKE_LIBRARY_PATH=/opt/local/lib
   FIND_LIBRARY(CPPUNIT cppunit)
-  SET(CPPUNIT ${CPPUNIT} "dl")
+  SET(CPPUNIT ${CPPUNIT})
   FIND_PATH(CPPUNIT_HEADERS cppunit/TestRunner.h)
   IF ( CPPUNIT AND CPPUNIT_HEADERS)
     MESSAGE("-- Looking for Cppunit - found")
