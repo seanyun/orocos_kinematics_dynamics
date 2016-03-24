@@ -3,7 +3,7 @@ package(
     default_visibility = ["//visibility:private"],
 )
 
-licenses(["notice"])
+licenses(["LGPL"])
 
 COPTS = [
     "-O3",
@@ -32,21 +32,29 @@ cc_library(
     copts = COPTS,
 
     deps = [
-        "//external:Eigen3",
+        "//third_party/eigen3:eigen3",
     ],
 
     visibility = ["//visibility:public"],
 )
 
-load("extension", "kdl_add_test")
+load("extension", "kdl_add_test", "kdl_add_test_qnx")
 
 # Creating a native genrule.
-kdl_add_test("framestest", "-ldl")
-kdl_add_test("kinfamtest", "-ldl")
-kdl_add_test("solvertest", "-ldl")
-kdl_add_test("inertiatest", "-ldl")
-kdl_add_test("jacobiantest", "-ldl")
-kdl_add_test("jacobiandottest", "-ldl")
-kdl_add_test("velocityprofiletest", "-ldl")
+kdl_add_test("framestest")
+kdl_add_test("kinfamtest")
+kdl_add_test("solvertest")
+kdl_add_test("inertiatest")
+kdl_add_test("jacobiantest")
+kdl_add_test("jacobiandottest")
+kdl_add_test("velocityprofiletest")
+
+#kdl_add_test_qnx("framestest") 
+#kdl_add_test_qnx("kinfamtest")
+#kdl_add_test_qnx("solvertest")
+#kdl_add_test_qnx("inertiatest")
+#kdl_add_test_qnx("jacobiantest")
+#kdl_add_test_qnx("jacobiandottest")
+#kdl_add_test_qnx("velocityprofiletest")
 
 

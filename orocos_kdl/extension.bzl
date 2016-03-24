@@ -1,4 +1,4 @@
-def kdl_add_test(name, libs="", visibility=None):
+def kdl_add_test(name, visibility=None):
   # Creating a native genrule.
   COPTS_TEST = ["-DTESTNAME=\"\\\""+name+"\\\"\""]
 
@@ -13,13 +13,13 @@ def kdl_add_test(name, libs="", visibility=None):
 	"tests/",],
     deps = [
 	":kdl",
-	"//external:cppunit"],
+	"//third_party/cppunit:cppunit"],
     copts = COPTS_TEST, 
-    linkopts = ["-lm", libs],
+    linkopts = ["-lm", "-ldl"],
     visibility = visibility,
   )
 
-def kdl_add_test_noheader(name, libs="", visibility=None):
+def kdl_add_test_qnx(name, libs="", visibility=None):
   # Creating a native genrule.
   COPTS_TEST = ["-DTESTNAME=\"\\\""+name+"\\\"\""]
 
@@ -27,14 +27,15 @@ def kdl_add_test_noheader(name, libs="", visibility=None):
     name = name,
     size = "small",
     srcs = ["tests/test-runner.cpp",
-	"tests/" + name + ".cpp"],
+	"tests/" + name + ".cpp", 
+	"tests/" + name + ".hpp"],
     includes = [
 	".",
 	"tests/",],
     deps = [
 	":kdl",
-	"//external:cppunit"],
+	"//third_party/cppunit:cppunit"],
     copts = COPTS_TEST, 
-    linkopts = ["-lm", libs],
+    linkopts = ["-lm"],
     visibility = visibility,
   )
